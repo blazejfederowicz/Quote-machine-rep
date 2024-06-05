@@ -30,8 +30,7 @@
 
 .nav-ul li{
     text-align: center;
-    padding-top: 1em;
-   
+    padding-top: 1.5em;
 }
 
 .nav-ul li a{
@@ -44,7 +43,7 @@
 .nav-ul li a::after{
     display: block;
     content: '';
-    margin-top: 28px;
+    margin-top: 1.5em;
     transform: scaleX(0);
     border-bottom: 2px solid var(--inputs-color);
     transition: transform 250ms ease-in-out;
