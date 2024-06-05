@@ -5,6 +5,10 @@
   --h1-font: "Inter", sans-serif;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 *{
   box-sizing: border-box;
 }
@@ -19,5 +23,17 @@ body{
   margin: 0;
   padding: 0;
   height: 100vh;
+}
+
+button{
+  border-radius: 30px;
+  padding: 1em;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border: 3px solid;
+  transition-property: color, background-color, border-color;
+  transition-duration: 175ms;
+  transition-timing-function: ease-in-out;
 }
 

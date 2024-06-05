@@ -3,5 +3,33 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.h1{
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.purple-button, .white-button{
+  border-color: var(--inputs-color);
+}
+
+.purple-button{
+  background-color: var(--inputs-color);
+  color: white;
+}
+
+.white-button{
+  background-color: white;
+  color: black;
+}
+
+.white-button:hover{
+  background-color: var(--inputs-color);
+  color: white;
+}
+
+.purple-button:hover{
+  background-color: hsl(286, 61%, 20%);
+  border-color: hsl(286, 61%, 20%);
 }

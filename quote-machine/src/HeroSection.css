@@ -1,0 +1,32 @@
+.hero-container{
+    padding: 0 10em;
+}
+
+.hero-heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-container, .hero-content, .hero-sub-content,.hero-headingm, .img-container{
+    width: 100%;
+}
+
+.white-button{
+    margin-left: 3em;
+}
+
+.img-container{
+    height: 600px;
+    border-radius: 30px;
+    margin: 3em 0;
+    background: url(D:\react_projects\Quote-machine-rep\quote-machine\src\assets\heading-picture.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero-content{
+    margin: 13em 0 10em 0;
+}
+

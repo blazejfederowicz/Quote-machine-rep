@@ -1,20 +1,56 @@
+.nav-container, .nav-ul li, .nav-ul li a{
+    width: 100%; 
+}
+
 .nav-container{
-    width: 100%;
+    border-bottom: 1px solid hsl(0, 0%, 80%);
+    position: fixed;
+    background-color: white;
+}
+
+.navbar, .nav-container{
     display: grid;
     align-items: center;
     justify-content: center;
 }
 
+.navbar, .nav-ul{
+    width: 554px;
+    max-width: 600px;
+    min-width: 100px;
+}
 
 .nav-ul{
     list-style: none;
+    display: flex;
+    align-items: center;
     margin: 0;
-    padding:0 ;
+    padding: 0;
 }
 
 .nav-ul li{
     text-align: center;
-    display: inline-block;
-    margin: 0 1em;
-    padding: 2em;
+    padding-top: 1em;
+   
 }
+
+.nav-ul li a{
+    text-decoration: none;
+    color: black;
+    font-weight: 300;
+    display: block;
+}
+
+.nav-ul li a::after{
+    display: block;
+    content: '';
+    margin-top: 28px;
+    transform: scaleX(0);
+    border-bottom: 2px solid var(--inputs-color);
+    transition: transform 250ms ease-in-out;
+}
+
+.nav-ul li a:hover::after{
+    transform: scaleX(1);
+}
+
