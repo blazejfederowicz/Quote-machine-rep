@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 
 const ButtonComponent = ({
     purple="Place Holder",
-    white='Place Holder'
+    white='Place Holder',
+    onclickPurple,
+    onclickWhite
 }) =>{
     const purpleLen = purple.trim().length;
     const whiteLen =white.trim().length;
@@ -14,8 +16,8 @@ const ButtonComponent = ({
 
     return(
     <div className={Styles.buttonContainer}>
-        <button className={Styles.purpleButton} style={{width: buttonWidth}}>{purple}</button>
-        <button className={Styles.whiteButton} style={{width: buttonWidth}}>{white}</button>
+        <button className={Styles.purpleButton} style={{width: buttonWidth}} onClick={onclickPurple}>{purple}</button>
+        <button className={Styles.whiteButton} style={{width: buttonWidth}} onClick={onclickWhite}>{white}</button>
     </div>);
 }
 

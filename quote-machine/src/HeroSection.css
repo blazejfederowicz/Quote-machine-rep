@@ -63,5 +63,12 @@
     margin-bottom: 0.5em;
 }
 
+.opacity-container{
+    transition: opacity 300ms ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+
 
 
