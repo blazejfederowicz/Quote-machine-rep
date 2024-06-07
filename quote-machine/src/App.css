@@ -1,35 +1,28 @@
 .container{
-  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .h1{
-  font-size: 48px;
+  font-size: 3rem;
   font-weight: bold;
+  line-height: 1.5;
 }
 
-.purple-button, .white-button{
-  border-color: var(--inputs-color);
+.h2{
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
-.purple-button{
-  background-color: var(--inputs-color);
-  color: white;
+.p{
+  font-size: 1.5rem;
+  line-height: 1.5;
 }
 
-.white-button{
-  background-color: white;
-  color: black;
-}
-
-.white-button:hover{
-  background-color: var(--inputs-color);
-  color: white;
-}
-
-.purple-button:hover{
-  background-color: hsl(286, 61%, 20%);
-  border-color: hsl(286, 61%, 20%);
+.bold{
+  font-weight: bold;
+  text-shadow: 0 0 1px black;
 }

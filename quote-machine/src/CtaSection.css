@@ -1,0 +1,15 @@
+.cta-container{
+    padding:0 10em 5em 10em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cta-container .h2,.cta-container .quote-container .p{
+    text-align: center;
+}
+
+.quote-container{
+    margin: 2em 0;
+}

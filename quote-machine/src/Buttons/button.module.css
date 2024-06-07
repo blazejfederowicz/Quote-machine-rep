@@ -1,0 +1,33 @@
+.buttonContainer{
+  margin:2em 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 325px;
+}
+
+.purpleButton, .whiteButton{
+    border-color: var(--inputs-color);
+    flex: 1;
+  }
+  
+  .purpleButton{
+    background-color: var(--inputs-color);
+    color: white;
+  }
+  
+  .whiteButton{
+    background-color: white;
+    color: black;
+  }
+  
+  .whiteButton:hover{
+    background-color: var(--inputs-color);
+    color: white;
+    width: auto;
+  }
+  
+  .purpleButton:hover{
+    background-color: hsl(286, 61%, 20%);
+    border-color: hsl(286, 61%, 20%);
+  }

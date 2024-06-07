@@ -29,11 +29,15 @@ button{
   border-radius: 30px;
   padding: 1em;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
   border: 3px solid;
+  max-width: 9em;
   transition-property: color, background-color, border-color;
   transition-duration: 175ms;
   transition-timing-function: ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
