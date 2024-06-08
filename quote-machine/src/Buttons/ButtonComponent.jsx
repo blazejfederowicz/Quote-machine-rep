@@ -23,7 +23,9 @@ const ButtonComponent = ({
 
 ButtonComponent.propTypes = {
     purple: PropTypes.string,
-    white: PropTypes.string
+    white: PropTypes.string,
+    onclickPurple: PropTypes.func,
+    onclickWhite: PropTypes.func
 }
 
 export default ButtonComponent

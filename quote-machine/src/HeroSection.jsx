@@ -1,7 +1,15 @@
 import "./HeroSection.css"
 import ButtonComponent from "./Buttons/ButtonComponent";
 
-const HeroSection = () => {
+
+const HeroSection = ({ctaRef}) => {
+
+    const handleScroll = () =>{
+        if(ctaRef.current){
+            ctaRef.current.scrollIntoView();
+        }
+    };
+
 
     const handleFilter = () => {
         const element = document.querySelector(".opacity-container");
@@ -9,7 +17,7 @@ const HeroSection = () => {
             element.style.opacity = "1";
             element.style.visibility = "visible";
         }
-    }
+    };
 
     return(
         <div id="hero" className="hero-container">
@@ -18,7 +26,7 @@ const HeroSection = () => {
                     <div className="h1-container">
                         <h1 className="h1">Welcome To the Quote<br/>Machine-Discover Inspiring<br/>Quotes</h1>
                     </div>
-                    <ButtonComponent purple ="Get Inspired" white="Learn More" onclickWhite={() =>handleFilter()}/>
+                    <ButtonComponent purple ="Get Inspired" white="Learn More" onclickWhite={() =>handleFilter()} onclickPurple={handleScroll}/>
                 </div>    
                 <div className="hero-sub-content">
                     <div className="background-sub-content"></div>

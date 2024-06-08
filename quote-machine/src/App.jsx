@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, {useRef, useEffect} from 'react'
 import Navbar from './Navbar'
 import HeroSection from './HeroSection'
 import CtaSection from './CtaSection'
@@ -8,14 +8,18 @@ import './App.css'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const scrollIntoCta = useRef(null);
+
+  useEffect(() =>{
+    console.log(scrollIntoCta.current)
+  },[])
 
   return (
     <>
       <div className='container'>
         <Navbar/>
-        <HeroSection/>
-        <CtaSection/>
+        <HeroSection ctaRef ={scrollIntoCta}/>
+        <CtaSection ref={scrollIntoCta}/>
         <FooterComponent/>
       </div>
     </>

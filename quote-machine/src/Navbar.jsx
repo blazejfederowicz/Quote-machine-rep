@@ -6,7 +6,7 @@ const Navbar = () =>{
             <nav className="navbar">
                 <ul className="nav-ul">
                     <li><a href="#hero">Home</a></li>
-                    <li><a href="#cta">Quote Machine</a></li>
+                    <li><a href="#quote-box">Quote Machine</a></li>
                     <li><a href="#footer">Contact</a></li>
                 </ul>
             </nav>
