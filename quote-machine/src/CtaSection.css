@@ -13,3 +13,33 @@
 .quote-container{
     margin: 2em 0;
 }
+.quote-container blockquote{
+    margin: 0;
+}
+.author{
+    text-align: center;
+    font-family: var( --quote-font);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 30%);
+    margin: 0;
+}
+.author::before,
+.author::after{
+    display: inline-block;
+    content: "";
+    border-top: .1rem solid hsl(0, 0%, 30%);
+    width: 3rem;
+    margin: 0 1rem;
+    transform: translateY(-0.5rem);
+}
+.icon1, .icon2{
+    font-size: 1rem;
+}
+.icon1{
+    transform: translate(-0.5rem, 0.5rem);
+}
+.icon2{
+    transform: translate(0.5rem, -0.5rem);
+}
+

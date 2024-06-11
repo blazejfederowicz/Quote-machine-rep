@@ -7,6 +7,8 @@ const CtaSection = React.forwardRef((_,ref) =>{
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [apiKey, setApiKey] = useState(null);
+    const [animation, setAnimation] = useState('');
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 
     useEffect( () =>{
@@ -23,7 +25,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
 
     const fetchQuote = () =>{
         setLoading(true);
-        fetch('https://api.api-ninjas.com/v1/quotes?category=happiness',
+        fetch('https://api.api-ninjas.com/v1/quotes',
             {headers: {
                 'X-Api-Key': apiKey
               }}
@@ -43,6 +45,28 @@ const CtaSection = React.forwardRef((_,ref) =>{
                 setLoading(false)
             })
     }
+
+    const handleAnimation = event => setAnimation(event.target.value) && animationLogic();
+        
+
+    const animationLogic = () =>{
+        let text= animation
+        let i = 0;
+        const interval = setInterval(() => {
+            animation = text.split("")
+                            .map((e,index) =>{
+                            if(index<i){
+                                return text[index]
+                            }
+                            return alphabet[Math.floor(Math.random()*26)]})
+                            .join("")
+            if(i >= text.length){
+                clearInterval(interval)
+            }
+            i+=1/3;
+        }, 30);
+    }
+    
 
     if(loading){
         return(<div ref={ref} id='quote-box' className="cta-container">
@@ -69,7 +93,16 @@ const CtaSection = React.forwardRef((_,ref) =>{
         <div ref={ref} id='quote-box' className="cta-container">
             <h2 className='h2'>Discover Inspiring Quotes<br/>Here</h2>
             <div className="quote-container">
-                {data && (<p className='p' id='text'>{data[0].quote}</p>)} 
+                {data && 
+                (<blockquote>
+                    
+                    <p className='p' id='text' value={animation} onChange={handleAnimation}>
+                        <i class="fa-solid fa-quote-left icon1"></i>
+                        {data[0].quote}
+                        <i class="fa-solid fa-quote-right icon2"></i>
+                        </p>
+                    <p className='author' id='author'>{data[0].author}</p>
+                </blockquote>)} 
             </div>
             <ButtonComponent purple='Generate' white='Share' onclickPurple={fetchQuote}/>
         </div>
