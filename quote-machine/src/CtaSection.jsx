@@ -6,12 +6,26 @@ const CtaSection = React.forwardRef((_,ref) =>{
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [apiKey, setApiKey] = useState(null);
+
+
+    useEffect( () =>{
+        fetch('/api/data')
+            .then(response => response.json())
+            .then(data => {
+                setApiKey(data.apiKey);
+            })
+            .catch(error =>{
+                console.error("error fetching apiKey ", error);
+            });
+        
+    },[]);
 
     const fetchQuote = () =>{
         setLoading(true);
         fetch('https://api.api-ninjas.com/v1/quotes?category=happiness',
             {headers: {
-                'X-Api-Key': 'mykey'
+                'X-Api-Key': apiKey
               }}
             )   
             .then(response =>{
@@ -29,10 +43,6 @@ const CtaSection = React.forwardRef((_,ref) =>{
                 setLoading(false)
             })
     }
-
-    useEffect( () =>{
-        
-    },[]);
 
     if(loading){
         return(<div ref={ref} id='quote-box' className="cta-container">
