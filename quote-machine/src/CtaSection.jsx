@@ -49,7 +49,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
     const handleAnimation = event => setAnimation(event.target.value) && animationLogic();
         
 
-    const animationLogic = () =>{
+    /*const animationLogic = () =>{
         let text= animation
         let i = 0;
         const interval = setInterval(() => {
@@ -65,7 +65,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
             }
             i+=1/3;
         }, 30);
-    }
+    }*/
     
 
     if(loading){
