@@ -3,11 +3,11 @@ import React, {useState,useEffect} from 'react';
 import ButtonComponent from './Buttons/ButtonComponent';
 
 const CtaSection = React.forwardRef((_,ref) =>{
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([{quote:'Get motivated by our collection of random quotes and share them with others. '}]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [apiKey, setApiKey] = useState(null);
-    const [animation, setAnimation] = useState('');
+    const [animatedText, setAnimatedText] = useState('')
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 
@@ -22,6 +22,33 @@ const CtaSection = React.forwardRef((_,ref) =>{
             });
         
     },[]);
+
+    useEffect(() =>{
+        if(!data[0].quote) return;
+        let text= data[0].quote
+        let i = 0;
+        const interval = setInterval(() => {
+            setAnimatedText( text.split("")
+                            .reduce((acc,e,index) =>{
+                            if(index<i){
+                                return acc + e;
+                            }
+                            else if(e == ' '){
+                                return acc + ' '
+                            }
+                            return acc +"#" /*alphabet[Math.floor(Math.random()*alphabet.length)]*/
+                        
+                        })
+                            ,'');
+            if(i >= text.length){
+                clearInterval(interval)
+                setAnimatedText(text)
+            }
+            i+=1;
+        }, 30);
+
+        return () => clearInterval(interval);
+    },[data])
 
     const fetchQuote = () =>{
         setLoading(true);
@@ -42,30 +69,9 @@ const CtaSection = React.forwardRef((_,ref) =>{
             })
             .catch(error =>{
                 setError(error);
-                setLoading(false)
-            })
-    }
-
-    const handleAnimation = event => setAnimation(event.target.value) && animationLogic();
-        
-
-    /*const animationLogic = () =>{
-        let text= animation
-        let i = 0;
-        const interval = setInterval(() => {
-            animation = text.split("")
-                            .map((e,index) =>{
-                            if(index<i){
-                                return text[index]
-                            }
-                            return alphabet[Math.floor(Math.random()*26)]})
-                            .join("")
-            if(i >= text.length){
-                clearInterval(interval)
-            }
-            i+=1/3;
-        }, 30);
-    }*/
+                setLoading(false);
+            });
+    };
     
 
     if(loading){
@@ -95,12 +101,11 @@ const CtaSection = React.forwardRef((_,ref) =>{
             <div className="quote-container">
                 {data && 
                 (<blockquote>
-                    
-                    <p className='p' id='text' value={animation} onChange={handleAnimation}>
-                        <i class="fa-solid fa-quote-left icon1"></i>
-                        {data[0].quote}
-                        <i class="fa-solid fa-quote-right icon2"></i>
-                        </p>
+                    <p className='p' key={animatedText} id='text'>
+                        <i className="fa-solid fa-quote-left icon1"></i>
+                        {animatedText}
+                        <i className="fa-solid fa-quote-right icon2"></i>
+                    </p>
                     <p className='author' id='author'>{data[0].author}</p>
                 </blockquote>)} 
             </div>
