@@ -18,7 +18,7 @@
   
   .whiteButton{
     background-color: white;
-    color: black;
+    color: var(--inputs-color);
   }
   
   .whiteButton:hover{
@@ -28,6 +28,6 @@
   }
   
   .purpleButton:hover{
-    background-color: hsl(286, 61%, 20%);
-    border-color: hsl(286, 61%, 20%);
+    background-color: hsl(0, 0%, 100%);
+    color: var(--inputs-color);
   }

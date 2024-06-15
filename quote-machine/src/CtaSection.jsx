@@ -3,13 +3,16 @@ import React, {useState,useEffect} from 'react';
 import ButtonComponent from './Buttons/ButtonComponent';
 
 const CtaSection = React.forwardRef((_,ref) =>{
-    const [data, setData] = useState([{quote:'Get motivated by our collection of random quotes and share them with others. '}]);
+    const [data, setData] = useState([{quote:'Get motivated by our collection of random quotes and share them with others.'}]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [apiKey, setApiKey] = useState(null);
     const [animatedText, setAnimatedText] = useState([])
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase();
 
+    if(data[0].quote === 'Get motivated by our collection of random quotes and share them with others.'){
+        document.querySelectorAll('.overlay').forEach(e => e.style.visibility = "hidden");
+    }
 
     useEffect( () =>{
         fetch('/api/data')
@@ -20,10 +23,16 @@ const CtaSection = React.forwardRef((_,ref) =>{
             .catch(error =>{
                 console.error("error fetching apiKey ", error);
             });
-        
     },[]);
 
     useEffect(() =>{
+        if(data[0].quote == 'Get motivated by our collection of random quotes and share them with others.'){
+            document.querySelector('#author').style.display = "none";
+        }
+        else{
+            document.querySelector('#author').style.display = "block";
+        }
+
         if(!data[0].quote) return;
         let text= data[0].quote
         let i = 0;
@@ -34,7 +43,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
                     acc.push({char: e, glitched: false});
                 }
                 else{
-                    acc.push({char: "#", glitched: true});
+                    acc.push({char: alphabet[Math.floor(Math.random()*alphabet.length)], glitched: true});
                 }
                 return acc
             },[]));
@@ -101,11 +110,11 @@ const CtaSection = React.forwardRef((_,ref) =>{
                 {data && 
                 (<blockquote>
                     <p className='p' key={animatedText} id='text'>
-                        <i className="fa-solid fa-quote-left icon1"></i>
+                        <i className="fa-solid fa-quote-left icon1 overlay"></i>
                         {animatedText.map(({char,glitched},i) => (
-                            <span key={i} style={{color:glitched?"var(--inputs-color)":"black"}}>{char}</span>
+                            <span key={i} style={glitched?{color:"hsl(286, 61%, 36%)",fontFamily:"monospace",fontWeight:"bold"}:{}}>{char}</span>
                         ))}
-                        <i className="fa-solid fa-quote-right icon2"></i>
+                        <i className="fa-solid fa-quote-right icon2 overlay"></i>
                     </p>
                     <p className='author' id='author'>{data[0].author}</p>
                 </blockquote>)} 
