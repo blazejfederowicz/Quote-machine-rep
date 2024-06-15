@@ -7,7 +7,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [apiKey, setApiKey] = useState(null);
-    const [animatedText, setAnimatedText] = useState('')
+    const [animatedText, setAnimatedText] = useState([])
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 
@@ -27,22 +27,21 @@ const CtaSection = React.forwardRef((_,ref) =>{
         if(!data[0].quote) return;
         let text= data[0].quote
         let i = 0;
+
         const interval = setInterval(() => {
-            setAnimatedText( text.split("")
-                            .reduce((acc,e,index) =>{
-                            if(index<i){
-                                return acc + e;
-                            }
-                            else if(e == ' '){
-                                return acc + ' '
-                            }
-                            return acc +"#" /*alphabet[Math.floor(Math.random()*alphabet.length)]*/
-                        
-                        })
-                            ,'');
+            setAnimatedText( text.split("").reduce((acc,e,index) => {
+                if(index < i || e === " "){
+                    acc.push({char: e, glitched: false});
+                }
+                else{
+                    acc.push({char: "#", glitched: true});
+                }
+                return acc
+            },[]));
+
             if(i >= text.length){
                 clearInterval(interval)
-                setAnimatedText(text)
+                setAnimatedText(text.split('').map(char => ({char, glitched:false})));
             }
             i+=1;
         }, 30);
@@ -85,13 +84,13 @@ const CtaSection = React.forwardRef((_,ref) =>{
     }
 
     if(error){
-        <div ref={ref} id='quote-box' className="cta-container">
+        return(<div ref={ref} id='quote-box' className="cta-container">
             <h2 className='h2'>Discover Inspiring Quotes<br/>Here</h2>
             <div className="quote-container">
             <p className='p' id='text'>Error: {error.message}</p>
             </div>
             <ButtonComponent purple='Generate' white='Share' onclickPurple={fetchQuote}/>
-        </div>
+        </div>);  
     }
 
 
@@ -103,7 +102,9 @@ const CtaSection = React.forwardRef((_,ref) =>{
                 (<blockquote>
                     <p className='p' key={animatedText} id='text'>
                         <i className="fa-solid fa-quote-left icon1"></i>
-                        {animatedText}
+                        {animatedText.map(({char,glitched},i) => (
+                            <span key={i} style={{color:glitched?"var(--inputs-color)":"black"}}>{char}</span>
+                        ))}
                         <i className="fa-solid fa-quote-right icon2"></i>
                     </p>
                     <p className='author' id='author'>{data[0].author}</p>
