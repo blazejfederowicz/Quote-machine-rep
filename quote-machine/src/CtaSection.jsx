@@ -1,5 +1,6 @@
 import './CtaSection.css';
 import React, {useState,useEffect} from 'react';
+import useThrottle from './custom-hooks/useThrottle';
 import ButtonComponent from './Buttons/ButtonComponent';
 
 const CtaSection = React.forwardRef((_,ref) =>{
@@ -58,6 +59,8 @@ const CtaSection = React.forwardRef((_,ref) =>{
         return () => clearInterval(interval);
     },[data])
 
+    const shareButton = () => window.open('https://x.com/intent/post','_blank');
+
     const fetchQuote = () =>{
         setLoading(true);
         fetch('https://api.api-ninjas.com/v1/quotes',
@@ -80,6 +83,10 @@ const CtaSection = React.forwardRef((_,ref) =>{
                 setLoading(false);
             });
     };
+
+    fetchQuote? console.log('working'): console.log('not working')
+
+    const throttledFetchQuote = useThrottle(fetchQuote, 10000);
     
 
     if(loading){
@@ -88,7 +95,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
             <div className="quote-container">
                 <p className='p' id='text'>Loading...</p>
             </div>
-            <ButtonComponent purple='Generate' white='Share' onclickPurple={fetchQuote}/>
+            <ButtonComponent purple='Generate' white='Share'/>
         </div>);
     }
 
@@ -98,7 +105,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
             <div className="quote-container">
             <p className='p' id='text'>Error: {error.message}</p>
             </div>
-            <ButtonComponent purple='Generate' white='Share' onclickPurple={fetchQuote}/>
+            <ButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote}/>
         </div>);  
     }
 
@@ -119,7 +126,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
                     <p className='author' id='author'>{data[0].author}</p>
                 </blockquote>)} 
             </div>
-            <ButtonComponent purple='Generate' white='Share' onclickPurple={fetchQuote}/>
+            <ButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote} onclickWhite={shareButton}/>
         </div>
     );
 })

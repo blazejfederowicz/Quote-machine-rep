@@ -8,6 +8,8 @@
     background-color: white;
     top: 0;
     z-index: 1;
+    transition: top 300ms ease-in-out;
+    max-height: 71px;
 }
 
 .navbar, .nav-container{

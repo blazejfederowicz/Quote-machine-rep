@@ -16,8 +16,8 @@ const ButtonComponent = ({
 
     return(
     <div className={Styles.buttonContainer}>
-        <button className={Styles.purpleButton} style={{width: buttonWidth}} onClick={onclickPurple}>{purple}</button>
-        <button className={Styles.whiteButton} style={{width: buttonWidth}} onClick={onclickWhite}>{white}</button>
+        <button type='button' className={Styles.purpleButton} style={{width: buttonWidth}} onClick={onclickPurple}>{purple}</button>
+        <button type='button' className={Styles.whiteButton} style={{width: buttonWidth}} onClick={onclickWhite}>{white}</button>
     </div>);
 }
 

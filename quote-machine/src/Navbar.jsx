@@ -1,6 +1,34 @@
+import React, {useEffect} from 'react';
+import useThrottle from './custom-hooks/useThrottle';
 import './Navbar.css'
 
 const Navbar = () =>{
+
+    useEffect(()=>{
+        const navContainer = document.querySelector('.nav-container');
+        let lastScrollPosition = 0;
+
+        const handleScroll = () =>{
+            const scrollPosition = window.scrollY !== undefined ? window.scrollY : document.documentElement.scrollTop;
+
+            if(scrollPosition > lastScrollPosition){
+                navContainer.style.top = '-72px';
+            }
+            else if(scrollPosition < lastScrollPosition){
+                navContainer.style.top = '0';
+            }
+            lastScrollPosition = Math.max(scrollPosition,0);
+        };
+
+        const throttledHandleScroll = useThrottle(handleScroll,10)
+
+        document.addEventListener('scroll', throttledHandleScroll, {passive:true});
+
+        return()=>{
+            document.removeEventListener('scroll', throttledHandleScroll);
+        };
+    },[])
+
     return(
         <div className="nav-container">
             <nav className="navbar">
