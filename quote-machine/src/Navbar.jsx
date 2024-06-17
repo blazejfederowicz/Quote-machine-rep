@@ -6,6 +6,7 @@ const Navbar = () =>{
 
     useEffect(()=>{
         const navContainer = document.querySelector('.nav-container');
+        const mobile = window.matchMedia('only screen and (min-width: 768px)').matches;
         let lastScrollPosition = 0;
 
         const handleScroll = () =>{
@@ -21,8 +22,11 @@ const Navbar = () =>{
         };
 
         const throttledHandleScroll = useThrottle(handleScroll,10)
-
         document.addEventListener('scroll', throttledHandleScroll, {passive:true});
+
+        if(!mobile){
+            document.removeEventListener('scroll', throttledHandleScroll);
+        }
 
         return()=>{
             document.removeEventListener('scroll', throttledHandleScroll);

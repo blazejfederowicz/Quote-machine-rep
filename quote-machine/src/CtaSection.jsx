@@ -1,7 +1,9 @@
 import './CtaSection.css';
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, useCallback} from 'react';
 import useThrottle from './custom-hooks/useThrottle';
+import useDebounce from './custom-hooks/useDebounce';
 import ButtonComponent from './Buttons/ButtonComponent';
+
 
 const CtaSection = React.forwardRef((_,ref) =>{
     const [data, setData] = useState([{quote:'Get motivated by our collection of random quotes and share them with others.'}]);
@@ -10,6 +12,8 @@ const CtaSection = React.forwardRef((_,ref) =>{
     const [apiKey, setApiKey] = useState(null);
     const [animatedText, setAnimatedText] = useState([])
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase();
+
+    const debaunceAnimatedText = useCallback(useDebounce(text => setAnimatedText(text),1),[])
 
     if(data[0].quote === 'Get motivated by our collection of random quotes and share them with others.'){
         document.querySelectorAll('.overlay').forEach(e => e.style.visibility = "hidden");
@@ -39,7 +43,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
         let i = 0;
 
         const interval = setInterval(() => {
-            setAnimatedText( text.split("").reduce((acc,e,index) => {
+            debaunceAnimatedText(text.split("").reduce((acc,e,index) => {
                 if(index < i || e === " "){
                     acc.push({char: e, glitched: false});
                 }
@@ -86,7 +90,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
 
     fetchQuote? console.log('working'): console.log('not working')
 
-    const throttledFetchQuote = useThrottle(fetchQuote, 10000);
+    const throttledFetchQuote = useThrottle(fetchQuote, 1000);
     
 
     if(loading){
