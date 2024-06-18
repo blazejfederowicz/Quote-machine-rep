@@ -7,6 +7,9 @@
     align-items: center;
     justify-content: center;
 }
+.h1-container{
+    max-width: 40em;
+}
 
 .hero-container, .hero-content, .hero-sub-content,.hero-heading, .img-container{
     width: 100%;
@@ -68,6 +71,74 @@
     opacity: 0;
     visibility: hidden;
 }
+
+@media screen and (max-width:1200px) {
+    .hero-container{
+        padding:5em 5em;
+    }
+
+    .background-sub-content, .text-sub-content{
+        width: 250px;
+        height: 300px;
+        border-radius: 30px;
+    }
+    .text-sub-content .opacity-container, .text-sub-content .opacity-container p{
+        font-size: 0.8rem !important;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .hero-content{
+        justify-content: space-between;
+    }
+    .hero-container{
+        padding: 0 2em;
+    }
+    .hero-content{
+        text-align: left;
+        
+    }
+    .background-sub-content, .text-sub-content{
+        width: 200px;
+        height: 250px;
+        border-radius: 30px;
+    }
+    .text-sub-content .opacity-container, .text-sub-content .opacity-container p{
+        font-size: 0.6rem !important;
+    }
+    .img-container{
+        margin:0;
+        height: 500px;
+    }
+}
+
+@media screen and (max-width:576px) {
+
+    .hero-container{
+        padding: 0 1em;
+    }
+    .hero-heading{
+        flex-direction: column;
+        margin-bottom: 5em;
+    }
+    .hero-content{
+        text-align: center;
+        align-items: center;
+    }
+    .background-sub-content, .text-sub-content{
+        width: 275px;
+        height: 325px;
+        border-radius: 30px;
+    }
+    .text-sub-content .opacity-container, .text-sub-content .opacity-container p{
+        font-size: 0.8rem !important;
+    }
+    .img-container{
+        height: 400px;
+        background-position: right;
+    }
+}
+
 
 
 

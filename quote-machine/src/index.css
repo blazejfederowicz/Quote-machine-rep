@@ -41,3 +41,19 @@ button{
   justify-content: center;
 }
 
+@media screen and (max-width:1200px) {
+  
+}
+
+@media screen and (max-width:768px) {
+  button{
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width:576px) {
+  button{
+    font-size: 0.9rem;
+  }
+}
+

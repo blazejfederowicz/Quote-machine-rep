@@ -43,3 +43,29 @@
     transform: translate(0.5rem, -0.5rem);
 }
 
+@media screen and (max-width:1200px) {
+    .cta-container{
+        padding: 0 5em 5em 5em;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .cta-container{
+        padding: 3em 2em;
+    }
+    .quote-container blockquote p{
+        font-size: 1.4rem !important;
+        margin-top: 0;
+    }
+    .quote-container blockquote .h2{
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width:576px) {
+    .cta-container{
+        padding: 2em 1em;
+    }
+}
+
+

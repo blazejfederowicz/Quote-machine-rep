@@ -29,3 +29,21 @@
     justify-content: space-around;
     align-items: center;
 }
+
+@media screen and (max-width:1200px) {
+
+}
+
+@media screen and (max-width:768px) {
+    .footer{
+        margin-top: 2em;
+        height: 10em;
+    }
+    .social-icons i{
+        font-size: 1.8em ;
+    }
+}
+
+@media screen and (max-width:576px) {
+    
+}

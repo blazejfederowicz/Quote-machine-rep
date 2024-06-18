@@ -24,7 +24,7 @@ const HeroSection = ({ctaRef}) => {
             <div className="hero-heading">
                 <div className="hero-content">
                     <div className="h1-container">
-                        <h1 className="h1">Welcome To the Quote<br/>Machine-Discover Inspiring<br/>Quotes</h1>
+                        <h1 className="h1">Welcome To the Quote Machine-Discover Inspiring Quotes</h1>
                     </div>
                     <ButtonComponent purple ="Get Inspired" white="Learn More" onclickWhite={() =>handleFilter()} onclickPurple={handleScroll}/>
                 </div>    

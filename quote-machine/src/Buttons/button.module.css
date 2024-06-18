@@ -31,3 +31,21 @@
     background-color: hsl(0, 0%, 100%);
     color: var(--inputs-color);
   }
+
+@media screen and (max-width:1200px) {
+    
+}
+
+@media screen and (max-width:768px) {
+    .buttonContainer{
+      max-width: 250px;
+      margin-bottom: 0;
+    }
+    
+}
+
+@media screen and (max-width:576px) {
+  .buttonContainer{
+    max-width: 300px;
+  }
+}

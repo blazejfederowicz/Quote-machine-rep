@@ -88,8 +88,6 @@ const CtaSection = React.forwardRef((_,ref) =>{
             });
     };
 
-    fetchQuote? console.log('working'): console.log('not working')
-
     const throttledFetchQuote = useThrottle(fetchQuote, 1000);
     
 

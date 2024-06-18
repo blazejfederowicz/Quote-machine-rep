@@ -26,3 +26,25 @@
   font-weight: bold;
   text-shadow: 0 0 1px black;
 }
+
+
+@media screen and (max-width:1200px) {
+  .h1{
+    font-size: 2.4rem;
+  }
+  
+  .h2{
+    font-size: 2.2rem;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .h1{
+    font-size: 2rem;
+  }
+  
+  .h2{
+    font-size: 1.8rem;
+  }
+}
+
