@@ -107,9 +107,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
             });
     };
 
-    const throttledFetchQuote = useThrottle(fetchQuote, 100000);
-    
-    console.log('yo')
+    const throttledFetchQuote = useThrottle(fetchQuote, 1000);
 
     if(loading){
         return(<div ref={ref} id='quote-box' className="cta-container">
@@ -117,7 +115,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
             <div className="quote-container">
                 <p className='p' id='text'>Loading...</p>
             </div>
-            <ButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote}/>
+            <ButtonComponent purple='Generate' white='Share'/>
         </div>);
     }
 

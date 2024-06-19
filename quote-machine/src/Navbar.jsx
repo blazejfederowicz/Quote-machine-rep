@@ -63,9 +63,6 @@ const Navbar = () =>{
         };
     },[throttledHandleScroll, updateEventListener])
 
-
-    console.log("gfdgfd")
-
     return(
         <>
             <div ref={navContainerRef} className="nav-container">
