@@ -1,4 +1,4 @@
-import React, {useEffect,useRef} from 'react';
+import React, {useEffect,useRef, useCallback} from 'react';
 import useThrottle from './custom-hooks/useThrottle';
 import './Navbar.css'
 
@@ -7,61 +7,64 @@ const Navbar = () =>{
     const navContainerRef = useRef(null);
     const hamContainerRef = useRef(null);
 
-    const handleScroll = () =>{
+    const handleScroll = useCallback(() =>{
         const navContainer = navContainerRef.current;
         const scrollPosition = window.scrollY !== undefined ? window.scrollY : document.documentElement.scrollTop;
-
-        if(scrollPosition > lastScrollPosition.current){
+        
+        if(scrollPosition > lastScrollPosition.current ){
             navContainer.style.top = '-72px';
         }
         else if(scrollPosition < lastScrollPosition.current){
             navContainer.style.top = '0';
         }
         lastScrollPosition.current = Math.max(scrollPosition,0);
-    };
+    },[]);
 
     const throttledHandleScroll = useThrottle(handleScroll,10)
 
-    useEffect(()=>{
-        const mobile = window.matchMedia('only screen and (min-width: 769px)').matches;
-
-        if(mobile){
-            document.addEventListener('scroll', throttledHandleScroll,{passive:true});
-            console.log('Scroll event listener added');
-        }
-
-        return()=>{
-            document.removeEventListener('scroll', throttledHandleScroll);
-            console.log('Scroll event listener removed');
-        };
-    },[throttledHandleScroll])
-
-    const handleClick = () =>{
+    const handleClick = useCallback(() =>{
         const hamContainer = hamContainerRef.current;
         const navContainer = navContainerRef.current;
 
         if (hamContainer && navContainer) {
             hamContainer.classList.toggle('active');
             navContainer.classList.toggle('active');
-            console.log('Active class toggled');
-            console.log('Ham container classes:', hamContainer.className);
-            console.log('Nav container classes:', navContainer.className);
         }
-    }
-
-    useEffect(() => {
-        const mobile = window.matchMedia('only screen and (min-width: 769px)').matches;
-
-        if(!mobile){
-            hamContainerRef.current.addEventListener('click',handleClick);
-            console.log('Click event listener added');
+    },[]);
+    
+    const updateEventListener = useCallback(()=>{
+        const mobile = window.matchMedia('only screen and (max-width: 768px)').matches;
+        const navContainer = navContainerRef.current;
+        
+        if(mobile && hamContainerRef.current){
+            navContainer.style.top = '0px';
+            hamContainerRef.current.addEventListener('click',handleClick,{passive:true});
+            document.removeEventListener('scroll', throttledHandleScroll);
+            console.log('Click event listener added');  
         }
-
-        return () =>{
-            hamContainerRef.current.removeEventListener('click',handleClick)
+        else{
+            document.addEventListener('scroll', throttledHandleScroll,{passive:true});
+            hamContainerRef.current.removeEventListener('click',handleClick);
             console.log('Click event listener removed');
         }
     },[handleClick])
+
+    useEffect(()=>{
+        updateEventListener();
+        window.addEventListener('resize',updateEventListener);
+
+        return()=>{
+            document.removeEventListener('scroll', throttledHandleScroll);
+            window.removeEventListener('resize',updateEventListener);
+            if(hamContainerRef.current){
+                hamContainerRef.current.removeEventListener('click',handleClick);
+            }
+            console.log('event listeners removed');
+        };
+    },[throttledHandleScroll, updateEventListener])
+
+
+    console.log("gfdgfd")
 
     return(
         <>

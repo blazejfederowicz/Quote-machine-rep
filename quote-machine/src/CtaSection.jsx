@@ -1,5 +1,5 @@
 import './CtaSection.css';
-import React, {useState,useEffect, useCallback} from 'react';
+import React, {useState,useEffect, useRef} from 'react';
 import useThrottle from './custom-hooks/useThrottle';
 import useDebounce from './custom-hooks/useDebounce';
 import ButtonComponent from './Buttons/ButtonComponent';
@@ -10,11 +10,11 @@ const CtaSection = React.forwardRef((_,ref) =>{
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [apiKey, setApiKey] = useState(null);
-    const [animatedText, setAnimatedText] = useState([])
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase();
+    const quoteRef = useRef(null);
+    const authorRef = useRef(null);
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
 
-    const debaunceAnimatedText = useCallback(useDebounce(text => setAnimatedText(text),1),[])
-
+    
     if(data[0].quote === 'Get motivated by our collection of random quotes and share them with others.'){
         document.querySelectorAll('.overlay').forEach(e => e.style.visibility = "hidden");
     }
@@ -31,31 +31,50 @@ const CtaSection = React.forwardRef((_,ref) =>{
     },[]);
 
     useEffect(() =>{
-        if(data[0].quote == 'Get motivated by our collection of random quotes and share them with others.'){
-            document.querySelector('#author').style.display = "none";
+        const text= data[0].quote
+        
+        if(text == 'Get motivated by our collection of random quotes and share them with others.'){
+            if(authorRef.current){
+                authorRef.current.style.display = "none";
+            }
         }
         else{
-            document.querySelector('#author').style.display = "block";
+            if(authorRef.current){
+                document.querySelector('#author').style.display = "block";
+            }
         }
 
-        if(!data[0].quote) return;
-        let text= data[0].quote
+        if(!text) return;
+
         let i = 0;
+        const spans = quoteRef.current.querySelectorAll('span')
 
         const interval = setInterval(() => {
-            debaunceAnimatedText(text.split("").reduce((acc,e,index) => {
-                if(index < i || e === " "){
-                    acc.push({char: e, glitched: false});
-                }
-                else{
-                    acc.push({char: alphabet[Math.floor(Math.random()*alphabet.length)], glitched: true});
-                }
-                return acc
-            },[]));
-
+            if(quoteRef.current){
+                text.split("").forEach((e,index) => {
+                    if(index < i || e === " "){
+                        spans[index].textContent = e;
+                        spans[index].style.color = '';
+                        spans[index].style.fontFamily = '';
+                        spans[index].style.fontWeight = '';
+                    }
+                    else{
+                        spans[index].textContent = alphabet[Math.floor(Math.random() * alphabet.length)];
+                        spans[index].style.color = 'hsl(286, 61%, 36%)';
+                        spans[index].style.fontFamily = 'monospace';
+                        spans[index].style.fontWeight = 'bold';
+                    }
+                });
+            }
+            
             if(i >= text.length){
                 clearInterval(interval)
-                setAnimatedText(text.split('').map(char => ({char, glitched:false})));
+                text.split('').forEach((e,index) =>{
+                    spans[index].textContent = e;
+                    spans[index].color = '';
+                    spans[index].fontFamily = '';
+                    spans[index].fontWeight = '';
+                });
             }
             i+=1;
         }, 30);
@@ -88,8 +107,9 @@ const CtaSection = React.forwardRef((_,ref) =>{
             });
     };
 
-    const throttledFetchQuote = useThrottle(fetchQuote, 1000);
+    const throttledFetchQuote = useThrottle(fetchQuote, 100000);
     
+    console.log('yo')
 
     if(loading){
         return(<div ref={ref} id='quote-box' className="cta-container">
@@ -97,7 +117,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
             <div className="quote-container">
                 <p className='p' id='text'>Loading...</p>
             </div>
-            <ButtonComponent purple='Generate' white='Share'/>
+            <ButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote}/>
         </div>);
     }
 
@@ -118,14 +138,14 @@ const CtaSection = React.forwardRef((_,ref) =>{
             <div className="quote-container">
                 {data && 
                 (<blockquote>
-                    <p className='p' key={animatedText} id='text'>
+                    <p ref={quoteRef} className='p' id='text'>
                         <i className="fa-solid fa-quote-left icon1 overlay"></i>
-                        {animatedText.map(({char,glitched},i) => (
-                            <span key={i} style={glitched?{color:"hsl(286, 61%, 36%)",fontFamily:"monospace",fontWeight:"bold"}:{}}>{char}</span>
+                        {data.length>0 && data[0].quote.split('').map((e,index) =>(
+                            <span key={index}>{e}</span>
                         ))}
                         <i className="fa-solid fa-quote-right icon2 overlay"></i>
                     </p>
-                    <p className='author' id='author'>{data[0].author}</p>
+                    <p ref={authorRef} className='author' id='author'>{data.length>0? data[0].author:''}</p>
                 </blockquote>)} 
             </div>
             <ButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote} onclickWhite={shareButton}/>
