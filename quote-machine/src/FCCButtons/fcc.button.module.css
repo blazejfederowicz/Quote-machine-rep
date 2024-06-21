@@ -1,0 +1,65 @@
+.buttonCon{
+  margin:2em 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 325px;
+}
+
+.purple, .white{
+    border-color: var(--inputs-color);
+    flex: 1;
+  }
+  
+  .purple{
+    background-color: var(--inputs-color);
+    color: white;
+  }
+  
+  .white{
+    background-color: white;
+    color: var(--inputs-color);
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 3px solid;
+    max-width: 9em;
+    transition-property: color, background-color, border-color;
+    transition-duration: 175ms;
+    transition-timing-function: ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  
+  .white:hover{
+    background-color: var(--inputs-color);
+    color: white;
+    border-color: var(--inputs-color);
+    width: auto;
+  }
+  
+  .purple:hover{
+    background-color: hsl(0, 0%, 100%);
+    color: var(--inputs-color);
+  }
+
+@media screen and (max-width:1200px) {
+    
+}
+
+@media screen and (max-width:768px) {
+    .buttonCon{
+      max-width: 250px;
+      margin-bottom: 0;
+    }
+    
+}
+
+@media screen and (max-width:576px) {
+  .buttonCon{
+    max-width: 300px;
+  }
+}

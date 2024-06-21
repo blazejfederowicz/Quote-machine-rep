@@ -1,8 +1,7 @@
 import './CtaSection.css';
 import React, {useState,useEffect, useRef} from 'react';
 import useThrottle from './custom-hooks/useThrottle';
-import useDebounce from './custom-hooks/useDebounce';
-import ButtonComponent from './Buttons/ButtonComponent';
+import FCCButtonComponent from './FCCButtons/FCCButtonComponent';
 
 
 const CtaSection = React.forwardRef((_,ref) =>{
@@ -29,6 +28,12 @@ const CtaSection = React.forwardRef((_,ref) =>{
                 console.error("error fetching apiKey ", error);
             });
     },[]);
+
+    useEffect(() =>{
+        if(apiKey){
+            fetchQuote()
+        }
+    },[apiKey])
 
     useEffect(() =>{
         const text= data[0].quote
@@ -82,8 +87,6 @@ const CtaSection = React.forwardRef((_,ref) =>{
         return () => clearInterval(interval);
     },[data])
 
-    const shareButton = () => window.open('https://x.com/intent/post','_blank');
-
     const fetchQuote = () =>{
         setLoading(true);
         fetch('https://api.api-ninjas.com/v1/quotes',
@@ -115,7 +118,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
             <div className="quote-container">
                 <p className='p' id='text'>Loading...</p>
             </div>
-            <ButtonComponent purple='Generate' white='Share'/>
+            <FCCButtonComponent purple='Generate' white='Share'/>
         </div>);
     }
 
@@ -125,7 +128,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
             <div className="quote-container">
             <p className='p' id='text'>Error: {error.message}</p>
             </div>
-            <ButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote}/>
+            <FCCButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote}/>
         </div>);  
     }
 
@@ -146,7 +149,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
                     <p ref={authorRef} className='author' id='author'>{data.length>0? data[0].author:''}</p>
                 </blockquote>)} 
             </div>
-            <ButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote} onclickWhite={shareButton}/>
+            <FCCButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote} href='https://twitter.com/intent/tweet'/>
         </div>
     );
 })
