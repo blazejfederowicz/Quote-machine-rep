@@ -149,7 +149,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
                     <p ref={authorRef} className='author' id='author'>{data.length>0? data[0].author:''}</p>
                 </blockquote>)} 
             </div>
-            <FCCButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote} href='https://twitter.com/intent/tweet'/>
+            <FCCButtonComponent purple='Generate' white='Share' onclickPurple={throttledFetchQuote}/>
         </div>
     );
 })
