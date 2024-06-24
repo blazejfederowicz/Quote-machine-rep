@@ -33,16 +33,17 @@ button{
   font-weight: bold;
   border: 3px solid;
   max-width: 9em;
-  transition-property: color, background-color, border-color;
-  transition-duration: 175ms;
-  transition-timing-function: ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@media screen and (max-width:1200px) {
-  
+@media screen and (min-width:1200px) {
+  button{
+    transition-property: color, background-color, border-color;
+    transition-duration: 175ms;
+    transition-timing-function: ease-in-out;
+  }
 }
 
 @media screen and (max-width:768px) {

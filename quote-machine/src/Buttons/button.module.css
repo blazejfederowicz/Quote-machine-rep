@@ -21,26 +21,30 @@
     color: var(--inputs-color);
   }
   
-  .whiteButton:hover{
+  
+
+  @media screen and (min-width: 1200px){
+    .whiteButton:hover{
+      background-color: var(--inputs-color);
+      color: white;
+      width: auto;
+    }
+    
+    .purpleButton:hover{
+      background-color: hsl(0, 0%, 100%);
+      color: var(--inputs-color);
+    }
+}
+@media screen and (max-width: 1199px) {
+  .purpleButton:active{
+    background-color: hsl(0, 0%, 100%);
+    color: var(--inputs-color);
+  }
+  .whiteButton:active{
     background-color: var(--inputs-color);
     color: white;
     width: auto;
   }
-  
-  .purpleButton:hover{
-    background-color: hsl(0, 0%, 100%);
-    color: var(--inputs-color);
-  }
-
-  @media (hover:none) and (pointer: coarse){
-    .purpleButton:hover{
-      background-color: var(--inputs-color);
-      color: white;
-    }
-    .whiteButton:hover{
-      background-color: white;
-      color: var(--inputs-color);
-    }
 }
 
 @media screen and (max-width:768px) {
@@ -48,16 +52,6 @@
       max-width: 250px;
       margin-bottom: 0;
     }
-    .purpleButton:active{
-      background-color: hsl(0, 0%, 100%);
-      color: var(--inputs-color);
-    }
-    .whiteButton:active{
-      background-color: var(--inputs-color);
-      color: white;
-      width: auto;
-    }
-    
 }
 
 @media screen and (max-width:576px) {
