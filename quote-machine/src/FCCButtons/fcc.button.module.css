@@ -23,7 +23,7 @@
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
-    border: 3px solid;
+    border: 3px solid var(--inputs-color);
     max-width: 9em;
     transition-property: color, background-color, border-color;
     transition-duration: 175ms;
@@ -37,7 +37,6 @@
   .white:hover{
     background-color: var(--inputs-color);
     color: white;
-    border-color: var(--inputs-color);
     width: auto;
   }
   
@@ -46,14 +45,30 @@
     color: var(--inputs-color);
   }
 
-@media screen and (max-width:1200px) {
-    
+@media (hover:none) and (pointer: coarse){
+    .purple:hover{
+      background-color: var(--inputs-color);
+      color: white;
+    }
+    .white:hover{
+      background-color: white;
+      color: var(--inputs-color);
+    }
 }
 
 @media screen and (max-width:768px) {
     .buttonCon{
       max-width: 250px;
       margin-bottom: 0;
+    }
+    .white:active{
+      background-color: var(--inputs-color);
+      color: white;
+      width: auto;
+    }
+    .purple:active{
+      background-color: hsl(0, 0%, 100%);
+      color: var(--inputs-color);
     }
     
 }
