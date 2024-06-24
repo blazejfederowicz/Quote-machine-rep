@@ -19,7 +19,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
     }
 
     useEffect( () =>{
-        fetch('https://quote-machine-server.onrender.com/api/data')
+        fetch('/api/data')
             .then(response => response.json())
             .then(data => {
                 setApiKey(data.apiKey);
