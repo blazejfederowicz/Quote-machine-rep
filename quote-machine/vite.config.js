@@ -6,11 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server:{
     proxy:{
-      '/api':{
-        target: 'https://quote-machine-server.onrender.com',
-        changeOrigin: true,
-        secure: true,
-      },
+      '/api': 'https://quote-machine-server.onrender.com'
     },
   },
 });
