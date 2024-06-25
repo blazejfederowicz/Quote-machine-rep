@@ -20,7 +20,11 @@ const CtaSection = React.forwardRef((_,ref) =>{
 
     useEffect( () =>{
         fetch('/api/data')
-            .then(response => response.json())
+            .then(response =>{
+                if(!response.ok){
+                    throw new Error(`HTTP error! status: ${response.status}`)
+                }
+                return response.json()})
             .then(data => {
                 setApiKey(data.apiKey);
             })
