@@ -3,10 +3,8 @@ const useThrottle = (func, delay) => {
 
     return (...args) => {
         if (!timeout) {
-            console.log('Throttled function executed');
             func(...args);
             timeout = setTimeout(() => {
-                console.log('Throttle timeout cleared');
                 timeout = null;
             }, delay);
         }else {
