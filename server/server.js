@@ -11,7 +11,8 @@ const apiKey = process.env.API_KEY;
 const allowedOrigins = [
     'quote-machine-rep.vercel.app',
     'quote-machine-rep-git-main-blazejs-projects-e5b94814.vercel.app',
-    'quote-machine-gmi2fhf5g-blazejs-projects-e5b94814.vercel.app'
+    'quote-machine-gmi2fhf5g-blazejs-projects-e5b94814.vercel.app',
+    'http://localhost:5173'
   ];
 
 const corsOptions = {
