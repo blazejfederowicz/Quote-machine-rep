@@ -100,7 +100,7 @@ const CtaSection = React.forwardRef((_,ref) =>{
             )   
             .then(response =>{
                 if(!response.ok){
-                    throw new Error("Error by network response")
+                    throw new Error("Error by network response / Server on render is turning on (give it a minute or two)")
                 }
                 return response.json();      
             })
